@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kỹ năng Tiếp nhận & Xử lý vấn đề triệt để</title>
     
-    <!-- Fonts -->
+    <!-- Fonts: Inter is primary -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;600;700&family=Poppins:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -33,13 +33,13 @@
                         brand: {
                             blue: '#1e3a8a',
                             orange: '#f97316',
+                            sky: '#e0f2fe',
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-                        display: ['Poppins', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Inter', 'sans-serif'], // Forcing Inter everywhere
                         roboto: ['Roboto', 'sans-serif'],
-                        nunito: ['Nunito', 'sans-serif'],
                     }
                 }
             }
@@ -47,43 +47,88 @@
     </script>
 
     <style>
-        @layer base {
-            body {
-                @apply bg-slate-100;
-            }
+        /* Force Inter Font */
+        * {
+            font-family: 'Inter', sans-serif !important;
         }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            margin: 0;
+            overflow-y: hidden; /* Prevent vertical scroll */
+        }
+
+        /* Horizontal Slider Container */
+        .slides-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            width: 100vw;
+            height: 100vh;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .slides-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        .slides-wrapper::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .slides-wrapper::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
         .slide-container {
+            flex: 0 0 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide-content {
             width: 1280px;
             height: 720px;
-            margin: 2rem auto;
             background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
             padding: 60px;
         }
-        .title-slide {
+
+        .title-slide-content {
             background-color: #1e3a8a;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
-        .emotion-cell i {
-            font-size: 38px;
+
+        .logo-container {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 50;
         }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
         @media print {
-            .slide-container {
-                margin: 0;
-                box-shadow: none;
-                page-break-after: always;
+            .slides-wrapper {
+                display: block;
+                overflow: visible;
             }
-            body {
-                background: white;
+            .slide-container {
+                page-break-after: always;
+                height: auto;
             }
         }
     </style>
@@ -101,36 +146,54 @@
             return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
         };
 
-        const Slide = ({ children, className = "" }) => (
-            <div className={`slide-container ${className}`}>
-                <div className="absolute -top-12 -right-12 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-900/5 rounded-full blur-3xl pointer-events-none" />
-                <div className="relative z-10 flex flex-col h-full">
-                    {children}
+        const Logo = () => (
+            <div className="logo-container">
+                <img 
+                    src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" 
+                    alt="KiotViet Logo" 
+                    className="logo-img"
+                    referrerPolicy="no-referrer"
+                />
+            </div>
+        );
+
+        const Slide = ({ children, className = "", isTitle = false }) => (
+            <div className="slide-container">
+                <div className={`slide-content ${isTitle ? 'title-slide-content' : ''} ${className}`}>
+                    <Logo />
+                    {!isTitle && (
+                        <>
+                            <div className="absolute -top-12 -right-12 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+                            <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-900/5 rounded-full blur-3xl pointer-events-none" />
+                        </>
+                    )}
+                    <div className="relative z-10 flex flex-col h-full">
+                        {children}
+                    </div>
                 </div>
             </div>
         );
 
         const SlideTitle = ({ children }) => (
-            <h2 className="text-4xl font-display font-extrabold mb-10 text-brand-blue uppercase border-l-8 border-brand-orange pl-4">
+            <h2 className="text-4xl font-bold mb-10 text-brand-blue uppercase border-l-8 border-brand-orange pl-4">
                 {children}
             </h2>
         );
 
         const App = () => {
             return (
-                <div className="min-h-screen py-10">
+                <div className="slides-wrapper">
                     {/* Slide 1: Title Slide */}
-                    <div className="slide-container title-slide">
+                    <Slide isTitle={true}>
                         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                             <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl" />
                             <div className="absolute bottom-10 right-10 w-96 h-96 bg-brand-orange rounded-full blur-3xl" />
                         </div>
-                        <div className="p-[60px] flex flex-col justify-center items-center relative z-10">
+                        <div className="p-[60px] flex flex-col justify-center items-center h-full relative z-10 text-center">
                             <motion.h1 
                                 initial={{ opacity: 0, y: -50 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="text-5xl font-display font-bold leading-tight uppercase mb-8"
+                                className="text-5xl font-bold leading-tight uppercase mb-8"
                             >
                                 Kỹ năng<br />
                                 Tiếp nhận & xử lý vấn đề triệt để
@@ -149,7 +212,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </Slide>
 
                     {/* Slide 2: Mục tiêu */}
                     <Slide>
@@ -194,7 +257,7 @@
                                     <div className="w-24 h-24 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-6">
                                         <Icon name={item.icon} size={48} />
                                     </div>
-                                    <h3 className="text-2xl font-display font-bold text-brand-blue mb-4">{item.title}</h3>
+                                    <h3 className="text-2xl font-bold text-brand-blue mb-4">{item.title}</h3>
                                     <p className="text-lg text-slate-600 leading-relaxed">{item.desc}</p>
                                 </div>
                             ))}
@@ -262,8 +325,8 @@
                     </Slide>
 
                     {/* Slide 6: Bảng Cảm Xúc */}
-                    <Slide className="font-roboto">
-                        <h2 className="text-[40px] font-bold font-roboto mb-[30px] text-[#1a4f4c] text-left w-full">
+                    <Slide>
+                        <h2 className="text-[40px] font-bold mb-[30px] text-[#1a4f4c] text-left w-full">
                             Bạn Đang Cảm Thấy Thế Nào?
                         </h2>
                         <div className="flex-grow flex flex-col items-center justify-center w-full">
@@ -301,7 +364,7 @@
                                     { text: "Kính Phục", icon: "fa-regular fa-face-grin-stars" },
                                 ].map((emotion, idx) => (
                                     <div key={idx} className="bg-white rounded-md border-[2.5px] border-[#5faea9] flex flex-col items-center justify-center p-2.5 text-center transition-transform hover:scale-105">
-                                        <span className="text-[#1e3f3d] font-roboto text-[15px] font-bold tracking-wider mb-3 uppercase leading-[1.1]">
+                                        <span className="text-[#1e3f3d] text-[15px] font-bold tracking-wider mb-3 uppercase leading-[1.1]">
                                             {emotion.text}
                                         </span>
                                         <i className={`${emotion.icon} text-[#5faea9] text-[38px] font-light`}></i>
@@ -332,7 +395,7 @@
                             ))}
                         </div>
                         <div className="mt-10 bg-brand-blue p-6 rounded-xl text-center">
-                            <p className="text-white text-3xl font-display font-bold flex items-center justify-center gap-4">
+                            <p className="text-white text-3xl font-bold flex items-center justify-center gap-4">
                                 <Icon name="quote" className="text-brand-orange rotate-180" /> THẤU HIỂU TRƯỚC - GIẢI THÍCH SAU <Icon name="quote" className="text-brand-orange" />
                             </p>
                         </div>
@@ -519,8 +582,8 @@
                             <table className="w-full border-collapse rounded-xl overflow-hidden shadow-lg">
                                 <thead>
                                     <tr className="bg-brand-blue text-white text-left">
-                                        <th className="p-6 text-xl font-display font-bold w-1/4"><Icon name="layers" className="inline mr-2" /> Nhóm Vấn Đề</th>
-                                        <th className="p-6 text-xl font-display font-bold"><Icon name="stethoscope" className="inline mr-2" /> Bảng Chẩn Đoán Nhanh & Dấu Hiệu</th>
+                                        <th className="p-6 text-xl font-bold w-1/4"><Icon name="layers" className="inline mr-2" /> Nhóm Vấn Đề</th>
+                                        <th className="p-6 text-xl font-bold"><Icon name="stethoscope" className="inline mr-2" /> Bảng Chẩn Đoán Nhanh & Dấu Hiệu</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-lg">
@@ -628,7 +691,7 @@
                                 { num: "1", color: "text-green-700", label: "Hành Động Thay Đổi", desc: "Cam kết thực hiện ngay vào ca làm việc ngày mai để cải thiện chất lượng cuộc gọi." }
                             ].map((item, i) => (
                                 <div key={i} className="bg-slate-50 border border-slate-200 rounded-xl p-10 flex flex-col items-center text-center shadow-sm">
-                                    <div className={`text-9xl font-display font-bold leading-none mb-6 ${item.color}`}>{item.num}</div>
+                                    <div className={`text-9xl font-bold leading-none mb-6 ${item.color}`}>{item.num}</div>
                                     <h3 className="text-xl font-bold text-brand-blue mb-4">{item.label}</h3>
                                     <p className="text-slate-600">{item.desc}</p>
                                 </div>
@@ -637,18 +700,18 @@
                     </Slide>
 
                     {/* Slide 17: Thông điệp cuối */}
-                    <div className="slide-container relative flex items-center justify-center">
+                    <Slide isTitle={true}>
                         <img 
                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" 
                             alt="Teamwork" 
                             className="absolute inset-0 w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-brand-blue/85 backdrop-blur-[2px]" />
-                        <div className="relative z-10 text-center max-w-4xl p-12">
+                        <div className="relative z-10 text-center max-w-4xl p-12 mx-auto h-full flex flex-col justify-center">
                             <motion.h2 
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                className="text-6xl font-display font-bold text-white mb-12 uppercase"
+                                className="text-6xl font-bold text-white mb-12 uppercase"
                             >
                                 Ghi nhớ
                             </motion.h2>
@@ -668,12 +731,12 @@
                                 </ul>
                             </div>
                             <div className="pt-10 border-t border-white/20">
-                                <p className="text-4xl font-display font-bold text-white italic">
+                                <p className="text-4xl font-bold text-white italic">
                                     "Chúc các bạn tự tin chinh phục mọi cuộc gọi!"
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </Slide>
                 </div>
             );
         };
