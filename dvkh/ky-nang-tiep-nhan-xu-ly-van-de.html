@@ -334,35 +334,28 @@
                     </div>
                 </Slide>,
 
-                // Slide 6: Bảng Cảm Xúc
+                // Slide 6: Bảng Cảm Xúc (Đã điều chỉnh theo yêu cầu)
                 <Slide key="6">
                     <h2 className="text-3xl font-extrabold mb-[20px] text-[#1a4f4c] text-left w-full drop-shadow-sm shrink-0">
                         Bạn Đang Cảm Thấy Thế Nào?
                     </h2>
                     <div className="flex-grow flex flex-col items-center justify-center w-full">
-                        <div className="grid grid-cols-6 grid-rows-5 gap-3 w-full h-full max-h-[460px]">
+                        <div className="grid grid-cols-4 grid-rows-2 gap-8 w-full max-w-5xl h-[360px]">
                             {[
-                                { text: "Hào Hứng", icon: "🤩" }, { text: "Hoang Mang", icon: "😵‍💫" },
-                                { text: "Khó Hiểu", icon: "🤨" }, { text: "Biết Ơn", icon: "🥰" },
-                                { text: "Thoải Mái", icon: "😌" }, { text: "Chán Nản", icon: "😞" },
-                                { text: "Hy Vọng", icon: "🤞" }, { text: "Mất Tập Trung", icon: "😶‍🌫️" },
-                                { text: "Vui Vẻ", icon: "😄" }, { text: "Nóng Lòng", icon: "😬" },
-                                { text: "Mệt Mỏi", icon: "😩" }, { text: "Chủ Động", icon: "😎" },
-                                { text: "Lạc Lõng", icon: "😟" }, { text: "Tò Mò", icon: "🤔" },
-                                { text: "Thích Thú", icon: "🥳" }, { text: "Sung Sướng", icon: "😆" },
-                                { text: "Hối Hận", icon: "😥" }, { text: "Bất Ngờ", icon: "😯" },
-                                { text: "Khó Chịu", icon: "😠" }, { text: "May Mắn", icon: "🍀" },
-                                { text: "Kết Nối", icon: "🤝" }, { text: "Lo Lắng", icon: "😰" },
-                                { text: "Ngại Ngùng", icon: "😳" }, { text: "Toại Nguyện", icon: "😇" },
-                                { text: "Tự Hào", icon: "😌" }, { text: "Nhẹ Nhõm", icon: "😮‍💨" },
-                                { text: "Có Lỗi", icon: "🥺" }, { text: "Tự Ti", icon: "😔" },
-                                { text: "Bình Yên", icon: "🧘" }, { text: "Kính Phục", icon: "🤯" },
+                                { text: "Căng thẳng", icon: "😬" }, 
+                                { text: "Bực bội/ức chế", icon: "😤" },
+                                { text: "Bối rối", icon: "😵‍💫" }, 
+                                { text: "Kiệt sức", icon: "😩" },
+                                { text: "Bình tĩnh", icon: "😌" }, 
+                                { text: "Tự hào", icon: "😎" },
+                                { text: "Nhẹ nhõm", icon: "😮‍💨" }, 
+                                { text: "Vui vẻ", icon: "😄" },
                             ].map((emotion, idx) => (
-                                <div key={idx} className="bg-white/90 backdrop-blur-sm rounded-xl border-[2px] border-[#5faea9]/30 flex flex-col items-center justify-center p-2 text-center transition-all hover:scale-110 hover:shadow-md hover:border-[#5faea9] cursor-default">
-                                    <span className="text-[#1e3f3d] text-[12px] font-bold tracking-wide mb-1 uppercase whitespace-nowrap">
+                                <div key={idx} className="bg-white/90 backdrop-blur-sm rounded-3xl border-[2px] border-[#5faea9]/30 flex flex-col items-center justify-center p-6 text-center transition-all hover:scale-110 hover:shadow-lg hover:border-[#5faea9] cursor-default">
+                                    <span className="text-[#1e3f3d] text-[18px] font-bold tracking-wide mb-4 uppercase whitespace-nowrap">
                                         {emotion.text}
                                     </span>
-                                    <span className="emoji-icon">{emotion.icon}</span>
+                                    <span className="text-[64px] leading-none filter drop-shadow-sm">{emotion.icon}</span>
                                 </div>
                             ))}
                         </div>
