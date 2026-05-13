@@ -252,20 +252,13 @@
                     </div>
                 </Slide>,
 
-                // Slide 4: Quy trình 5 bước - ROADMAP REDESIGN
+                // Slide 4: Quy trình 5 bước
                 <Slide key="4">
                     <SlideTitle>Quy Trình 5 Bước Cuộc Gọi Hotline</SlideTitle>
                     <div className="flex-grow flex flex-col justify-center relative w-full pt-4">
-                        
-                        {/* Roadmap Container */}
                         <div className="relative w-full h-[280px] flex items-center">
-                            
-                            {/* Path Line Background */}
                             <div className="absolute top-[78px] left-[5%] right-[5%] h-3 bg-blue-100 rounded-full shadow-inner" />
-                            
-                            {/* Path Line Progress (Up to step 2) */}
                             <div className="absolute top-[78px] left-[5%] w-[35%] h-3 bg-gradient-to-r from-brand-orange to-orange-400 rounded-full shadow-[0_0_15px_rgba(249,115,22,0.4)]" />
-
                             <div className="flex justify-between relative z-10 w-full px-4">
                                 {[
                                     { step: "Bước 1", title: "Chào hỏi.", active: false },
@@ -275,28 +268,19 @@
                                     { step: "Bước 5", title: "Tạo ticket ghi nhận\ntrên hệ thống.", active: false }
                                 ].map((item, i) => (
                                     <div key={i} className="flex flex-col items-center w-[19%] relative group">
-                                        
-                                        {/* Node Icon */}
                                         <div className={`w-[76px] h-[76px] rounded-full border-[5px] flex items-center justify-center font-bold text-[15px] whitespace-nowrap z-10 shadow-lg transition-transform duration-300 group-hover:-translate-y-2 ${item.active ? 'bg-brand-orange border-white text-white scale-110 shadow-orange-500/50' : 'bg-white border-brand-blue text-brand-blue'}`}>
                                             {item.step}
                                         </div>
-
-                                        {/* Node Pointer/Triangle */}
                                         <div className={`w-4 h-4 rotate-45 mt-4 -mb-2 z-0 ${item.active ? 'bg-brand-orange' : 'bg-white'}`}></div>
-
-                                        {/* Content Card */}
                                         <div className={`p-4 rounded-xl text-center w-full h-[100px] flex items-center justify-center shadow-md border ${item.active ? 'bg-orange-50 border-orange-200' : 'bg-white border-slate-100'}`}>
                                             <p className={`text-[15px] font-bold leading-snug whitespace-pre-line ${item.active ? 'text-brand-orange' : 'text-slate-800'}`}>
                                                 {item.title}
                                             </p>
                                         </div>
-                                        
                                     </div>
                                 ))}
                             </div>
                         </div>
-
-                        {/* Highlight Section */}
                         <div className="mt-14 w-full flex justify-center">
                             <p className="font-bold text-white text-[22px] flex items-center justify-center gap-3 bg-gradient-to-r from-brand-orange to-orange-500 px-8 py-4 rounded-full shadow-xl shadow-orange-500/30 whitespace-nowrap">
                                 <Icon name="star" className="text-yellow-200" size={28} /> Highlight: Bài học hôm nay đi sâu vào kỹ năng xử lý tại Bước 2.
@@ -334,7 +318,7 @@
                     </div>
                 </Slide>,
 
-                // Slide 6: Bảng Cảm Xúc (Đã điều chỉnh theo yêu cầu)
+                // Slide 6: Bảng Cảm Xúc 
                 <Slide key="6">
                     <h2 className="text-3xl font-extrabold mb-[20px] text-[#1a4f4c] text-left w-full drop-shadow-sm shrink-0">
                         Bạn Đang Cảm Thấy Thế Nào?
@@ -562,8 +546,63 @@
                     </div>
                 </Slide>,
 
-                // Slide 13: Kỹ năng xử lý
+                // Slide 13: CÁC LỖI THƯỜNG GẶP (SLIDE BỔ SUNG SỐ 1)
                 <Slide key="13">
+                    <SlideTitle>Các Lỗi Thường Gặp Khi Hướng Dẫn Khách Hàng</SlideTitle>
+                    <div className="flex flex-col flex-grow justify-center w-full max-w-4xl mx-auto space-y-8">
+                        {[
+                            { icon: "languages", title: "Dùng thuật ngữ chuyên môn gây khó hiểu" },
+                            { icon: "fast-forward", title: "Trình bày 1 lèo liên tục các thao tác" },
+                            { icon: "help-circle", title: "Không xác nhận trạng thái của khách hàng" }
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white/90 p-8 rounded-2xl border border-red-100 flex items-center gap-8 shadow-md hover:shadow-lg transition-all hover:translate-x-3">
+                                <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center text-red-500 shrink-0 border border-red-100 shadow-inner">
+                                    <Icon name={item.icon} size={40} />
+                                </div>
+                                <h3 className="text-[28px] font-bold text-brand-blue">{item.title}</h3>
+                            </div>
+                        ))}
+                    </div>
+                </Slide>,
+
+                // Slide 14: MINH HỌA LỖI MẮC PHẢI (SLIDE BỔ SUNG SỐ 2)
+                <Slide key="14">
+                    <SlideTitle>Minh Họa Lỗi Mắc Phải</SlideTitle>
+                    <div className="flex-grow flex flex-col gap-10 justify-center h-full">
+                        {/* Quote Box */}
+                        <div className="bg-white p-8 rounded-3xl border-l-8 border-red-500 shadow-xl relative shrink-0">
+                            <Icon name="quote" className="absolute -top-6 -left-6 text-red-200 w-12 h-12 rotate-180 bg-white rounded-full" />
+                            <p className="text-[22px] italic leading-relaxed text-slate-700">
+                                "Dạ để <strong className="text-red-600 underline decoration-red-200 underline-offset-4">fix</strong> tồn kho bị lệch thì chị phải <strong className="text-red-600 underline decoration-red-200 underline-offset-4">clear</strong> hết các phiếu kiểm kho đang ở <strong className="text-red-600 underline decoration-red-200 underline-offset-4">status</strong> Tạm đi nhé, không là nó khóa <strong className="text-red-600 underline decoration-red-200 underline-offset-4">data</strong> không <strong className="text-red-600 underline decoration-red-200 underline-offset-4">update</strong> được đâu. Chị vào <strong className="text-red-600 underline decoration-red-200 underline-offset-4">tab</strong> Hàng hóa, mở phần Kiểm kho rồi <strong className="text-red-600 underline decoration-red-200 underline-offset-4">filter</strong> các phiếu tạm ra xóa hết đi nha. Xong bước đó thì chị <strong className="text-red-600 underline decoration-red-200 underline-offset-4">export</strong> <strong className="text-red-600 underline decoration-red-200 underline-offset-4">list</strong> hàng hóa ra file Excel, <strong className="text-red-600 underline decoration-red-200 underline-offset-4">input</strong> số tồn thực tế vào cột tồn kho rồi <strong className="text-red-600 underline decoration-red-200 underline-offset-4">import</strong> file đó ngược lại hệ thống là số nó tự nhảy."
+                            </p>
+                        </div>
+                        
+                        {/* Explanations */}
+                        <div className="grid grid-cols-2 gap-8 flex-grow">
+                            <div className="bg-orange-50 p-6 rounded-2xl border border-orange-200 flex gap-4 shadow-sm hover:-translate-y-1 transition-transform">
+                                <div className="shrink-0 mt-1">
+                                    <Icon name="alert-triangle" className="text-brand-orange" size={28} />
+                                </div>
+                                <div>
+                                    <strong className="text-xl text-brand-orange block mb-3">Lạm dụng từ chuyên môn</strong>
+                                    <p className="text-[17px] text-slate-700 leading-snug">Các từ in đậm (fix, clear, status, data, v.v.) là ngôn ngữ kỹ thuật, khiến khách hàng phổ thông cảm thấy bối rối và khó làm theo.</p>
+                                </div>
+                            </div>
+                            <div className="bg-red-50 p-6 rounded-2xl border border-red-200 flex gap-4 shadow-sm hover:-translate-y-1 transition-transform">
+                                <div className="shrink-0 mt-1">
+                                    <Icon name="x-circle" className="text-red-500" size={28} />
+                                </div>
+                                <div>
+                                    <strong className="text-xl text-red-600 block mb-3">Không chia bước & Không xác nhận</strong>
+                                    <p className="text-[17px] text-slate-700 leading-snug">Hướng dẫn gộp cả quy trình dọn dẹp phiếu tạm và quy trình xuất nhập Excel. DVKH không xác nhận khách đã xóa xong phiếu tạm chưa mà đã chuyển sang làm Excel. Nếu làm sai thứ tự, số liệu sẽ vẫn bị lỗi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Slide>,
+
+                // Slide 15: Kỹ năng xử lý (Đổi key từ 13 thành 15)
+                <Slide key="15">
                     <SlideTitle>2.2 Kỹ Năng Xử Lý Vấn Đề Hiệu Quả</SlideTitle>
                     <div className="grid grid-cols-2 gap-10 flex-grow items-center h-full overflow-hidden">
                         <div>
@@ -594,8 +633,8 @@
                     </div>
                 </Slide>,
 
-                // Slide 14: Checklist
-                <Slide key="14">
+                // Slide 16: Checklist
+                <Slide key="16">
                     <SlideTitle>Checklist Tiếp Nhận & Xử Lý</SlideTitle>
                     <div className="flex flex-col flex-grow justify-center w-full">
                         <div className="grid grid-cols-2 gap-8 w-full items-stretch h-[400px]">
@@ -619,8 +658,8 @@
                     </div>
                 </Slide>,
 
-                // Slide 15: Roleplay
-                <Slide key="15">
+                // Slide 17: Roleplay
+                <Slide key="17">
                     <SlideTitle>Roleplay - Tình Huống Thực Tế</SlideTitle>
                     <div className="flex-grow flex flex-col justify-center">
                         <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-xl relative mt-6">
@@ -639,8 +678,8 @@
                     </div>
                 </Slide>,
 
-                // Slide 16: Đúc kết
-                <Slide key="16">
+                // Slide 18: Đúc kết
+                <Slide key="18">
                     <SlideTitle>Đúc Kết Cá Nhân (Mô Hình 3-2-1)</SlideTitle>
                     <div className="flex flex-col flex-grow justify-center w-full">
                         <div className="grid grid-cols-3 gap-8 w-full items-stretch h-[380px]">
@@ -659,8 +698,8 @@
                     </div>
                 </Slide>,
 
-                // Slide 17: Thông điệp cuối
-                <Slide key="17" isTitle={true}>
+                // Slide 19: Thông điệp cuối
+                <Slide key="19" isTitle={true}>
                     <img 
                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200" 
                         alt="Teamwork" 
